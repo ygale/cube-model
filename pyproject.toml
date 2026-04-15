@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "rubik-cube-model"
+version = "0.1.0"
+description = "Orientation-independent, strictly typed Rubik's Cube sticker model"
+authors = ["OpenAI <example@example.com>"]
+readme = "README.md"
+packages = [{ include = "rubik_cube_model", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.19.0"
+pytest = "^8.4.0"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"

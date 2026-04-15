@@ -1,0 +1,23 @@
+# python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# packaging
+*.egg-info/
+dist/
+build/
+
+# virtualenv
+.venv/
+venv/
+env/
+
+# tooling caches
+.mypy_cache/
+.pytest_cache/
+.coverage
+
+# os
+.DS_Store
