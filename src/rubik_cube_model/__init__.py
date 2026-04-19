@@ -9,6 +9,19 @@ from .model import (
   solved,
 )
 
+from .navigation import (
+  Nav,
+  nav,
+  nav_cc,
+  parse_navs,
+  HOME_TO_SIDE,
+  corner_on_side,
+  side_corners,
+  sticker_side,
+  side_color,
+  color_side,
+)
+
 __all__ = [
   'Color',
   'Side',
@@ -18,4 +31,14 @@ __all__ = [
   'Cube',
   'validate_links',
   'solved',
+  'Nav',
+  'nav',
+  'nav_cc',
+  'parse_navs',
+  'HOME_TO_SIDE',
+  'corner_on_side',
+  'side_corners',
+  'sticker_side',
+  'side_color',
+  'color_side',
 ]
