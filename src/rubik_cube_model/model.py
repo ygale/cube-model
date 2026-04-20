@@ -115,7 +115,7 @@ def solved() -> Cube:
     s[1].other = s[2]
     s[2].other = s[0]
 
-    if (a, b, c) == (FRONT, TOP, LEFT):
+    if (a, b, c) == (FRONT, LEFT, TOP):
       home = s[0]
 
     for i in range(3):
@@ -125,17 +125,17 @@ def solved() -> Cube:
       c0: Color = curr.color
       c1: Color = nxt.color
       c2: Color = prv.color
-      next_edge[curr] = edge_cubies[(c0, c1)]
-      next_corner[edge_cubies[(c2, c0)]] = curr
+      next_edge[curr] = edge_cubies[(c0, c2)]
+      next_corner[edge_cubies[(c0, c1)]] = curr
 
-  make_corner(FRONT, TOP, LEFT)
+  make_corner(FRONT, LEFT, TOP)
   make_corner(FRONT, TOP, RIGHT)
+  make_corner(FRONT, RIGHT, BOTTOM)
   make_corner(FRONT, BOTTOM, LEFT)
-  make_corner(FRONT, BOTTOM, RIGHT)
-  make_corner(BACK, TOP, LEFT)
-  make_corner(BACK, TOP, RIGHT)
-  make_corner(BACK, BOTTOM, LEFT)
+  make_corner(BACK, RIGHT, TOP)
   make_corner(BACK, BOTTOM, RIGHT)
+  make_corner(BACK, LEFT, BOTTOM)
+  make_corner(BACK, TOP, LEFT)
 
   assert home is not None
 
