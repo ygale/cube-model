@@ -20,6 +20,7 @@ from .navigation import (
   sticker_side,
   side_color,
   color_side,
+  all_colors,
 )
 
 __all__ = [
@@ -41,4 +42,5 @@ __all__ = [
   'sticker_side',
   'side_color',
   'color_side',
+  'all_colors',
 ]
