@@ -58,7 +58,7 @@ class EdgeSticker(Sticker):
   '''Edge sticker linked in a 2-cycle.'''
   other: EdgeSticker = field(init=False)
 
-@dataclass(eq=False)
+@dataclass
 class Cube:
   '''Cube defined by one corner and cyclic adjacency maps.'''
   home: CornerSticker
@@ -67,19 +67,6 @@ class Cube:
   next_edge: dict[CornerSticker, EdgeSticker]
   next_corner: dict[EdgeSticker, CornerSticker]
 
-  def __eq__(self, other: object) -> bool:
-    'Compare cubes via canonical traversal.'
-    if not isinstance(other, Cube):
-      return NotImplemented
-    return (
-      _cube_signature(self),
-      self.front_color,
-      self.top_color,
-    ) == (
-      _cube_signature(other),
-      other.front_color,
-      other.top_color,
-    )
 def validate_links(cube: Cube) -> None:
   '''Check consistency between next_edge and next_corner.'''
   corner: CornerSticker
@@ -164,31 +151,3 @@ def solved() -> Cube:
     next_edge=next_edge,
     next_corner=next_corner,
   )
-
-def _cube_signature(c: Cube) -> tuple[Color, ...]:
-  '''Canonical traversal-based cube signature.'''
-  res: list[Color] = []
-  corner: CornerSticker = c.home
-  e0: EdgeSticker
-  e2: EdgeSticker
-  for i in range(2): # front/back
-    for j in range(4): # corners on face
-      s: CornerSticker = corner
-      res.append(s.color)
-      e0 = c.next_edge[s]
-      res.append(e0.color)
-      s = s.other
-      res.append(s.color)
-      res.append(c.next_edge[s].color)
-      s = s.other
-      res.append(s.color)
-      e2 = c.next_edge[s]
-      res.append(e2.color)
-      if j == 3:
-        break
-      corner = c.next_corner[e0]
-    if i == 1:
-      break
-    # jump to back face
-    corner = c.next_corner[e2].other.other
-  return tuple(res)
