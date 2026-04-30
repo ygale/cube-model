@@ -67,15 +67,6 @@ class Cube:
   next_edge: dict[CornerSticker, EdgeSticker]
   next_corner: dict[EdgeSticker, CornerSticker]
 
-def validate_links(cube: Cube) -> None:
-  '''Check consistency between next_edge and next_corner.'''
-  corner: CornerSticker
-  edge: EdgeSticker
-  for corner, edge in cube.next_edge.items():
-    assert cube.next_corner[edge] is corner
-  for edge, corner in cube.next_corner.items():
-    assert cube.next_edge[corner] is edge
-
 def solved() -> Cube:
   '''Construct a solved cube using local color relationships.'''
   FRONT: Color = Color.GREEN

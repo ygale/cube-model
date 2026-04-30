@@ -5,7 +5,6 @@ from .model import (
   CornerSticker,
   EdgeSticker,
   Cube,
-  validate_links,
   solved,
 )
 
@@ -30,7 +29,6 @@ __all__ = [
   'CornerSticker',
   'EdgeSticker',
   'Cube',
-  'validate_links',
   'solved',
   'Nav',
   'nav',
