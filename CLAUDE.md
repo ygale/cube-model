@@ -53,6 +53,11 @@ Together these three fields fully determine the cube's orientation. No other
 orientation state exists. Calculations that depend on the cube's orientation
 use `home` as their starting point.
 
+Equality on stickers is determined by color and other.color.
+It follows that standard dataclass equality makes cubes
+equal exactly when they are in the same position and
+the same orientation.
+
 ## Navigation
 
 Navigation is the only way to move between stickers. There are two primitive
