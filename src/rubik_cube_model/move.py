@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from copy import deepcopy
 from dataclasses import dataclass
 from enum import Enum, auto
 
-from .model import CornerSticker, Cube, EdgeSticker, Side
+from .model import CornerSticker, Cube, EdgeSticker, Side, shallow_copy
 from .navigation import (
   Nav,
   nav_cc,
@@ -156,6 +155,6 @@ def move(cube: Cube, m: Move) -> None:
 
 def moved(cube: Cube, m: Move) -> Cube:
   '''Return a new cube after rotating a face.'''
-  new: Cube = deepcopy(cube)
+  new: Cube = shallow_copy(cube)
   move(new, m)
   return new

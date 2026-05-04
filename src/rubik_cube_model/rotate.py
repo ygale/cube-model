@@ -1,11 +1,12 @@
 '''Rigid rotation of the Rubik's cube.'''
 
-from copy import deepcopy
+
 
 from .model import (
     Color,
     Cube,
     Side,
+    shallow_copy,
     solved,
 )
 from .move import Move, Multiplicity
@@ -123,6 +124,6 @@ def rotate(move: Move, cube: Cube) -> None:
 
 def rotated(move: Move, cube: Cube) -> Cube:
     '''Return a new cube after rotating it rigidly.'''
-    new_cube: Cube = deepcopy(cube)
+    new_cube: Cube = shallow_copy(cube)
     rotate(move, new_cube)
     return new_cube

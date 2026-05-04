@@ -36,10 +36,12 @@ class Sticker(ABC):
     self._rewire(self)
 
   def _rewire(self, other: Sticker) -> None:
+    '''Set partner and recompute hash.'''
     self.other = other
     self._hash = hash((self.color, other.color))
 
   def __eq__(self, other: object) -> bool:
+    '''Equality based on color pair.'''
     if not isinstance(other, Sticker):
       return NotImplemented
     return self.color == other.color and self.other.color == other.other.color
@@ -66,6 +68,22 @@ class Cube:
   top_color: Color
   next_edge: dict[CornerSticker, EdgeSticker]
   next_corner: dict[EdgeSticker, CornerSticker]
+
+def shallow_copy(cube: Cube) -> Cube:
+  '''Return a new Cube sharing all sticker objects but with new dicts.
+
+  Moves only reassign dict values (which sticker a key maps to); they
+  never mutate sticker objects themselves. A shallow copy therefore
+  gives full independence between the two cubes without allocating new
+  sticker objects.
+  '''
+  return Cube(
+    home=cube.home,
+    front_color=cube.front_color,
+    top_color=cube.top_color,
+    next_edge=dict(cube.next_edge),
+    next_corner=dict(cube.next_corner),
+  )
 
 def solved() -> Cube:
   '''Construct a solved cube using local color relationships.'''
