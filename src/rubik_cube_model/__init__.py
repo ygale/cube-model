@@ -41,6 +41,11 @@ from .reachable import (
   reachable,
 )
 
+from .rotate import (
+  rotate,
+  rotated,
+)
+
 __all__ = [
   'Color',
   'Side',
@@ -70,4 +75,6 @@ __all__ = [
   'edge_flips_ok',
   'corner_rotations_ok',
   'reachable',
+  'rotate',
+  'rotated',
 ]

@@ -241,3 +241,6 @@ edges), covering all 12 edge cubies.
   evaluation on 3.14+ without it.
 - When modifying any code described in an Implementation detail section
   of this file, update that section to match.
+
+## Cube Rotations
+- Use `rotate(Move, Cube)` and `rotated(Move, Cube)` for rigid rotations of the cube
