@@ -174,6 +174,11 @@ These three criteria together are also sufficient -
 if all three criteria are satisfied, the cube position can be
 reached from the solved state by a sequence of face moves.
 
+A cube can be solved if and only if it can be reached from the
+solved state: given a sequence of moves to reach the cube position
+from the solved state, you can solve the cube by reversing the
+sequence and reversing the direction of each move.
+
 ### Permutation parity (`locations_ok`)
 
 Each face move cycles 4 corner cubies and 4 edge cubies simultaneously. A
@@ -222,6 +227,22 @@ all 8 corner cubies. `_all_edges` yields `next_edge[c]` for each front corner
 (4 front-ring edges), `next_edge[c.other.other]` for each front corner (4
 middle-layer edges), and `next_edge[c]` for each back corner (4 back-ring
 edges), covering all 12 edge cubies.
+
+## Creating Cubes
+
+Two functions are provided for creating a new cube with all
+navigation links pre-wired. One creates a cube in the solved state,
+and the other creates a cube in a solvable randomly shuffled state.
+If an initial cube is provided to either function, the sticker
+objects of the initial cube are re-used; otherwise, a full set of
+new sticker objects is created from scratch.
+
+All functions that change the state of the cube are provided in two
+versions: one version that modifies the cube in place, and an
+immutable version that creates a new cube in the modified state
+without modifying the supplied cube. In either case, the sticker
+objects of the supplied cube are re-used, and no new sticker objects
+are created.
 
 ## Conventions Specific to This Project
 

@@ -8,13 +8,13 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 
+from .new_cube import solved
 from .model import (
   Color,
   CornerSticker,
   Cube,
   EdgeSticker,
   Side,
-  solved,
 )
 from .navigation import (
   corner_on_side,

@@ -6,7 +6,8 @@ from collections.abc import Iterable
 from enum import Enum, auto
 from typing import cast
 
-from .model import Color, CornerSticker, Cube, EdgeSticker, Side, Sticker, solved
+from .model import Color, CornerSticker, Cube, EdgeSticker, Side, Sticker
+from .new_cube import solved
 
 class Nav(Enum):
   '''Navigation steps: next or other.'''

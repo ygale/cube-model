@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from collections.abc import Hashable, Sequence
+from collections.abc import Hashable, Iterator, Sequence
+from random import randrange
 
 def permutation_cycles[T: Hashable](
   start: Sequence[T],
@@ -46,3 +47,12 @@ def even_permutation[T: Hashable](
     1 for c in cycles if len(c) % 2 == 0
   )
   return even_count % 2 == 0
+
+def to_radix(base: int, n: int) -> Iterator[int]:
+  '''Little-endian representation of n in the given base'''
+  while n > 0:
+    yield n % base
+    n //= base
+
+def rand_elt[T](seq: Sequence[T]) -> T:
+  return seq[randrange(len(seq))]

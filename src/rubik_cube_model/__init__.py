@@ -1,3 +1,4 @@
+from .new_cube import new_cube, shuffled, solved
 from .model import (
   Color,
   Side,
@@ -5,7 +6,6 @@ from .model import (
   CornerSticker,
   EdgeSticker,
   Cube,
-  solved,
 )
 
 from .navigation import (
@@ -32,6 +32,8 @@ from .move import (
 from .utils import (
   permutation_cycles,
   even_permutation,
+  rand_elt,
+  to_radix,
 )
 
 from .reachable import (
@@ -53,6 +55,8 @@ __all__ = [
   'CornerSticker',
   'EdgeSticker',
   'Cube',
+  'new_cube',
+  'shuffled',
   'solved',
   'Nav',
   'nav',
@@ -71,6 +75,8 @@ __all__ = [
   'moved',
   'permutation_cycles',
   'even_permutation',
+  'rand_elt',
+  'to_radix',
   'locations_ok',
   'edge_flips_ok',
   'corner_rotations_ok',

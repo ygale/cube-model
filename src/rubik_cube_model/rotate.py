@@ -2,12 +2,12 @@
 
 
 
+from .new_cube import solved
 from .model import (
     Color,
     Cube,
     Side,
     shallow_copy,
-    solved,
 )
 from .move import Move, Multiplicity
 from .navigation import (
