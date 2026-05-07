@@ -72,11 +72,11 @@ steps, encoded by the `Nav` enum:
 of `NEXT` steps ends on the same type it started on; a sequence with an odd
 number ends on the opposite type.
 
-`nav(steps, cube, sticker)` applies a sequence of `Nav` steps starting from
-any sticker on the cube and returns a `Sticker`.
+`nav(nav_path, cube, sticker)` applies a sequence of `Nav` steps
+starting from any sticker on the cube and returns a `Sticker`.
 
-`nav_cc(steps, cube, sticker)` is a convenience function for the common
-package-internal case of corner-to-corner navigation; it returns
+`nav_cc(nav_path, cube, sticker)` is a convenience function for the
+common case of corner-to-corner navigation; it returns
 `CornerSticker` directly, simplifying call sites that know the result must be
 a corner.
 

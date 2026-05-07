@@ -14,8 +14,16 @@ class Nav(Enum):
   NEXT = auto()
   OTHER = auto()
 
-def nav(steps: Iterable[Nav], cube: Cube, sticker: Sticker) -> Sticker:
+type NavPath = Iterable[Nav]
+
+def nav(nav_path: NavPath | str, cube: Cube, sticker: Sticker) -> Sticker:
   '''Apply a sequence of navigation steps.'''
+  steps: NavPath
+  if isinstance(nav_path, str):
+    steps = parse_navs(nav_path)
+  else:
+    steps = nav_path
+
   current: Sticker = sticker
   is_edge: bool = isinstance(current, EdgeSticker)
   step: Nav
@@ -32,10 +40,10 @@ def nav(steps: Iterable[Nav], cube: Cube, sticker: Sticker) -> Sticker:
   return current
 
 def nav_cc(
-  steps: Iterable[Nav], cube: Cube, sticker: CornerSticker
+  nav_path: NavPath | str, cube: Cube, sticker: CornerSticker
 ) -> CornerSticker:
   '''Navigate corner to corner under even NEXT parity.'''
-  return cast(CornerSticker, nav(steps, cube, sticker))
+  return cast(CornerSticker, nav(nav_path, cube, sticker))
 
 def parse_navs(text: str) -> list[Nav]:
   '''Parse a string of N and O into navigation steps.'''
