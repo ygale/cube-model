@@ -20,7 +20,6 @@ class Multiplicity(Enum):
   CCW = auto()
   TWO = auto()
 
-
 # Inverse multiplicity: CW<->CCW, TWO is self-inverse.
 invert: dict[Multiplicity, Multiplicity] = {
     Multiplicity.CW:  Multiplicity.CCW,

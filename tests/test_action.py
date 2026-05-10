@@ -19,26 +19,21 @@ from rubik_cube_model.rotate import rotate
 from rubik_cube_model import Color, all_colors, solved
 from cube_integrity import check_cube_integrity
 
-
 def _face(side: Side, mult: Multiplicity) -> Move:
     '''Convenience constructor for a plain face Move.'''
     return Move(side, mult)
-
 
 def _rot(side: Side, mult: Multiplicity) -> Rotation:
     '''Convenience constructor for a Rotation.'''
     return Rotation(Move(side, mult))
 
-
 def _wide(side: Side, mult: Multiplicity) -> WideMove:
     '''Convenience constructor for a WideMove.'''
     return WideMove(Move(side, mult))
 
-
 def _slice(side: Side, mult: Multiplicity) -> SliceMove:
     '''Convenience constructor for a SliceMove.'''
     return SliceMove(Move(side, mult))
-
 
 class TestFaceMoves:
     '''Tests for standard face-move tokens.'''
@@ -80,7 +75,6 @@ class TestFaceMoves:
         '''Tokens without spaces parse identically to spaced tokens.'''
         assert parse_actions("RUR'U'") == parse_actions("R U R' U'")
 
-
 class TestRotations:
     '''Tests for cube rotation tokens.'''
 
@@ -99,7 +93,6 @@ class TestRotations:
     def test_rotation_is_rotation_type(self) -> None:
         '''Parsed rotation has type Rotation.'''
         assert isinstance(parse_actions('x')[0], Rotation)
-
 
 class TestWideMoves:
     '''Tests for wide-move tokens.'''
@@ -139,7 +132,6 @@ class TestWideMoves:
             _wide(Side.RIGHT, Multiplicity.CCW),
         ]
 
-
 class TestSliceMoves:
     '''Tests for slice-move tokens.'''
 
@@ -158,7 +150,6 @@ class TestSliceMoves:
     def test_slice_is_slice_type(self) -> None:
         '''Parsed slice move has type SliceMove.'''
         assert isinstance(parse_actions('M')[0], SliceMove)
-
 
 class TestCaseInsensitiveDialect:
     '''Tests for ci=True parsing dialect.'''
@@ -232,7 +223,6 @@ class TestCaseInsensitiveDialect:
             _slice(Side.LEFT, Multiplicity.CCW),
         ]
 
-
 class TestParseErrors:
     '''Tests for ParseError on invalid input.'''
 
@@ -258,7 +248,6 @@ class TestParseErrors:
         '''w suffix on unknown letter raises ParseError.'''
         with pytest.raises(ParseError):
             parse_actions('Qw')
-
 
 class TestAct:
     '''Tests for act(): in-place action dispatch.'''
@@ -365,7 +354,6 @@ class TestAct:
         for action in parse_actions("RUR'U'"):
             act(action, cube)
         check_cube_integrity(cube)
-
 
 class TestActed:
     '''Tests for acted(): immutable action dispatch.'''

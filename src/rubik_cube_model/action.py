@@ -37,24 +37,20 @@ from .model import Cube, Side, opp_side, shallow_copy
 from .move import Move, Multiplicity, invert, move
 from .rotate import rotate
 
-
 @dataclass(frozen=True)
 class Rotation:
     '''A rigid cube rotation (x, y, z); newtype of Move.'''
     move: Move
-
 
 @dataclass(frozen=True)
 class WideMove:
     '''A wide two-layer move; newtype of Move.'''
     move: Move
 
-
 @dataclass(frozen=True)
 class SliceMove:
     '''A middle-layer slice move (M, E, S); newtype of Move.'''
     move: Move
-
 
 # Any action representable in standard Rubik's cube notation.
 type Action = Move | Rotation | WideMove | SliceMove
@@ -98,10 +94,8 @@ _SLICE_SIDE: dict[str, Side] = {
     'S': Side.FRONT,
 }
 
-
 class ParseError(ValueError):
     '''Raised when a move token cannot be parsed.'''
-
 
 def _parse_mult(s: str, pos: int) -> tuple[Multiplicity, int]:
     '''Parse a multiplicity modifier at pos, returning (mult, new_pos).'''
@@ -110,7 +104,6 @@ def _parse_mult(s: str, pos: int) -> tuple[Multiplicity, int]:
     if pos < len(s) and s[pos] == '2':
         return Multiplicity.TWO, pos + 1
     return Multiplicity.CW, pos
-
 
 def _parse_one(s: str, pos: int, ci: bool) -> tuple[Action, int]:
     '''Parse one token from s starting at pos.
@@ -155,7 +148,6 @@ def _parse_one(s: str, pos: int, ci: bool) -> tuple[Action, int]:
         return SliceMove(Move(_SLICE_SIDE[base], mult)), pos
     raise ParseError(f'unknown move letter {base!r}')
 
-
 def parse_actions(s: str, ci: bool = False) -> list[Action]:
     '''Parse standard Rubik's cube move notation into a list of actions.
 
@@ -175,7 +167,6 @@ def parse_actions(s: str, ci: bool = False) -> list[Action]:
         actions.append(action)
     return actions
 
-
 def act(action: Action, cube: Cube) -> None:
     '''Apply an action to a cube in place.'''
     match action:
@@ -190,7 +181,6 @@ def act(action: Action, cube: Cube) -> None:
             move(Move(m.face, invert[m.mult]), cube)
         case Move() as m:
             move(m, cube)
-
 
 def acted(action: Action, cube: Cube) -> Cube:
     '''Return a new cube with an action applied, leaving the original unchanged.'''

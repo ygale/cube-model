@@ -72,7 +72,6 @@ class Cube:
   next_edge:   dict[CornerSticker, EdgeSticker]
   next_corner: dict[EdgeSticker, CornerSticker]
 
-
 # Opposite face for each side.
 opp_side: dict[Side, Side] = {
     Side.LEFT:   Side.RIGHT,

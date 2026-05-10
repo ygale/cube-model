@@ -30,7 +30,9 @@ _PRIORITY: list[Color] = [
 
 _WY: frozenset[Color] = frozenset({Color.WHITE, Color.YELLOW})
 
+# Frozenset of the three colors of a corner cubie.
 type _Cubie3 = frozenset[Color]
+# Frozenset of the two colors of an edge cubie.
 type _Cubie2 = frozenset[Color]
 
 def _all_corners(cube: Cube) -> Iterator[CornerSticker]:

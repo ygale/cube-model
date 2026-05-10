@@ -14,6 +14,7 @@ class Nav(Enum):
   NEXT = auto()
   OTHER = auto()
 
+# A sequence of Nav steps, accepted as an argument to nav().
 type NavPath = Iterable[Nav]
 
 def nav(nav_path: NavPath | str, cube: Cube, sticker: Sticker) -> Sticker:
