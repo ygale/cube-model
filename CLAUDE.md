@@ -183,11 +183,14 @@ sequence and reversing the direction of each move.
 
 Each face move cycles 4 corner cubies and 4 edge cubies simultaneously. A
 4-cycle is an odd permutation, so every move changes the parity of both the
-corner permutation and the edge permutation by the same amount. The two
-parities therefore always stay equal. `locations_ok` verifies this by
-computing the permutation that takes the current corner-cubie order to the
-solved order, and likewise for edge cubies, and checking that both
-permutations are even or both are odd.
+corner permutation and the edge permutation. Every move also changes the
+center orientation, which has its own parity. All three parities flip
+together on every move, so the number of even parities among the three is
+always the same parity — and in the solved state all three are even (count=3,
+odd), so the invariant is that the count is always odd. `locations_ok`
+verifies this by computing the corner and edge permutations relative to the
+solved order, computing the center parity from `front_color` and `top_color`,
+and checking that an odd number of the three are even.
 
 Cubies are identified by the frozenset of their sticker colors. The ordering
 is produced by `_all_corners` and `_all_edges`, which enumerate cubies in a

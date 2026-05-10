@@ -200,6 +200,22 @@ _SOLVED_EDGES: list[tuple[Color, Color]] = [
 
 _ALL_COLORS: list[Color] = list(Color)
 
+_GB: frozenset[Color] = frozenset({Color.GREEN,  Color.BLUE  })
+_OR: frozenset[Color] = frozenset({Color.ORANGE, Color.RED   })
+_WY: frozenset[Color] = frozenset({Color.WHITE,  Color.YELLOW})
+
+def center_parity_even(front_color: Color, top_color: Color) -> bool:
+  '''Return True if the center orientation is an even permutation.
+
+  The center permutation is even when the front and top colors are in
+  one of the three cyclic-neighbor pairs: (GB, WY), (WY, OR), (OR, GB),
+  where GB = {Green, Blue}, WY = {White, Yellow}, OR = {Orange, Red}.
+  '''
+  return (
+       front_color in _GB and top_color in _WY
+    or front_color in _WY and top_color in _OR
+    or front_color in _OR and top_color in _GB)
+
 def solved(initial: Cube | None = None) -> Cube:
   '''Construct a solved cube.
 
@@ -217,9 +233,13 @@ def solved(initial: Cube | None = None) -> Cube:
 def shuffled(initial: Cube | None = None) -> Cube:
   '''Construct a solvable randomly shuffled cube.
 
-  Corners and edges are permuted randomly. To ensure solvability,
-  the first two edges are transposed if the permutations have
-  different parity.
+  The front color is chosen uniformly at random. To ensure a valid
+  cube, the top color is chosen uniformly at random only from the
+  four colors that are neither the front color nor its opposite.
+
+  Corners and edges are permuted randomly. To ensure solvability, the
+  first two edges are transposed if needed so that the corner, edge,
+  and center permutation parities satisfy the three-way XOR invariant.
 
   Edge orientations: a random integer in [0, 2**11) determines which
   of the first 11 edges are flipped. To ensure solvability, the 12th
@@ -230,12 +250,14 @@ def shuffled(initial: Cube | None = None) -> Cube:
   the 8th corner is twisted so that the total twist sum is
   divisible by 3.
 
-  The front color is chosen uniformly at random. To ensure a valid
-  cube, the top color is chosen uniformly at random only from the
-  four colors that are neither the front color nor its opposite.
-
   If initial is supplied, its sticker objects are reused.
+
   '''
+  front_color: Color = rand_elt(_ALL_COLORS)
+  top_color: Color = rand_elt([c for c in _ALL_COLORS
+    if c is not front_color
+    and c is not _OPPOSITE[front_color]])
+
   corners: list[tuple[Color, Color, Color]] = list(_SOLVED_CORNERS)
   edges:   list[tuple[Color, Color]]        = list(_SOLVED_EDGES)
 
@@ -244,7 +266,8 @@ def shuffled(initial: Cube | None = None) -> Cube:
 
   corner_even: bool = even_permutation(corners, _SOLVED_CORNERS)
   edge_even: bool = even_permutation(edges, _SOLVED_EDGES)
-  if corner_even != edge_even:
+  center_even: bool = center_parity_even(front_color, top_color)
+  if not (corner_even ^ edge_even ^ center_even):
     edges[0], edges[1] = edges[1], edges[0]
 
   edge_bits: int = randrange(2 ** 11)
@@ -266,11 +289,6 @@ def shuffled(initial: Cube | None = None) -> Cube:
       case 2:
         a, b, c = corners[i]
         corners[i] = (b, c, a)
-
-  front_color: Color = rand_elt(_ALL_COLORS)
-  top_color: Color = rand_elt([c for c in _ALL_COLORS
-    if c is not front_color
-    and c is not _OPPOSITE[front_color]])
 
   return new_cube(
     corners=corners,

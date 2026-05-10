@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 
-from .new_cube import solved
+from .new_cube import solved, center_parity_even
 from .model import (
   Color,
   CornerSticker,
@@ -27,6 +27,8 @@ from .utils import even_permutation
 _PRIORITY: list[Color] = [
   Color.BLUE, Color.GREEN, Color.WHITE, Color.YELLOW,
 ]
+
+_WY: frozenset[Color] = frozenset({Color.WHITE, Color.YELLOW})
 
 type _Cubie3 = frozenset[Color]
 type _Cubie2 = frozenset[Color]
@@ -73,13 +75,14 @@ _SOLVED_EDGES: list[_Cubie2] = [
   _edge_cubie(es) for es in _all_edges(_ref)
 ]
 
-_GB: tuple[Color, Color] = (Color.GREEN,  Color.BLUE  )
-_OR: tuple[Color, Color] = (Color.ORANGE, Color.RED   )
-_WY: tuple[Color, Color] = (Color.WHITE,  Color.YELLOW)
-
 def locations_ok(cube: Cube) -> bool:
-  '''Return True if out of corner, edge, and center permutations, an
-  even number have even parity.'''
+  '''Return True if the corner, edge, and center permutation parities
+  satisfy the reachability invariant.
+
+  Every face move flips all three parities simultaneously, so their
+  XOR is conserved. In the solved state all three are even, so XOR is
+  True; locations_ok checks that the XOR remains True.
+  '''
   corner_even: bool = even_permutation(
     [_corner_cubie(cs) for cs in _all_corners(cube)],
     _SOLVED_CORNERS,
@@ -88,14 +91,8 @@ def locations_ok(cube: Cube) -> bool:
     [_edge_cubie(es) for es in _all_edges(cube)],
     _SOLVED_EDGES,
   )
-  f: Color = cube.front_color
-  t: Color = cube.top_color
-  center_even: bool = (
-       f in _GB and t in _WY
-    or f in _WY and t in _OR
-    or f in _OR and t in _GB)
-  return sum(1 if e else 0 for e in (corner_even, edge_even, center_even)
-    ) % 2 == 0
+  center_even: bool = center_parity_even(cube.front_color, cube.top_color)
+  return corner_even ^ edge_even ^ center_even
 
 def _rep_sticker(es: EdgeSticker) -> EdgeSticker:
   '''Return the representative sticker of an edge cubie.
