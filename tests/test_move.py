@@ -2,7 +2,7 @@
 
 import pytest
 from cube_integrity import check_cube_integrity
-from rubik_cube_model import (
+from rubik_model import (
     Move,
     Multiplicity,
     Side,

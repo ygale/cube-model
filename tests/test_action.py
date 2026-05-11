@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import pytest
-from rubik_cube_model.action import (
+from rubik_model.action import (
     Action,
     ParseError,
     Rotation,
@@ -13,10 +13,10 @@ from rubik_cube_model.action import (
     acted,
     parse_actions,
 )
-from rubik_cube_model.model import Side, opp_side
-from rubik_cube_model.move import Move, Multiplicity, invert, move
-from rubik_cube_model.rotate import rotate
-from rubik_cube_model import Color, all_colors, solved
+from rubik_model.model import Side, opp_side
+from rubik_model.move import Move, Multiplicity, invert, move
+from rubik_model.rotate import rotate
+from rubik_model import Color, all_colors, solved
 from cube_integrity import check_cube_integrity
 
 def _face(side: Side, mult: Multiplicity) -> Move:

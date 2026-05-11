@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "rubik-cube-model"
-version = "0.1.0"
+name = "rubik-model"
+version = "1.0.0"
 description = "Orientation-independent Rubik cube model in strictly typed Python"
 authors = ["Yitzchak Gale <gale@sefer.org>"]
 readme = "README.md"
-packages = [{ include = "rubik_cube_model", from = "src" }]
+packages = [{ include = "rubik_model", from = "src" }]
 
 [tool.poetry.dependencies]
 python = ">=3.13,<4.0"
