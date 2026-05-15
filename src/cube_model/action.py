@@ -1,4 +1,4 @@
-'''Standard Rubik's cube move notation: actions, parsing, and dispatch.
+'''Standard cube move notation: actions, parsing, and dispatch.
 
 Action is the union Move | Rotation | WideMove | SliceMove.
 Rotation, WideMove, and SliceMove are frozen dataclasses wrapping a
@@ -13,7 +13,7 @@ Decompositions:
   SliceMove(m) — rotate(m, cube); move(Move(opp_side[m.face], m.mult), cube);
                  move(Move(m.face, invert[m.mult]), cube)
 
-parse_actions(s, ci=False) parses standard Rubik's cube move notation.
+parse_actions(s, ci=False) parses standard cube move notation.
 Tokens may be written with or without spaces between them. Each token
 is a base letter followed by an optional modifier: nothing (CW),
 apostrophe (CCW), or 2 (TWO).
@@ -52,7 +52,7 @@ class SliceMove:
     '''A middle-layer slice move (M, E, S); newtype of Move.'''
     move: Move
 
-# Any action representable in standard Rubik's cube notation.
+# Any action representable in standard cube notation.
 type Action = Move | Rotation | WideMove | SliceMove
 
 # An iterator of Action values.
@@ -149,7 +149,7 @@ def _parse_one(s: str, pos: int, ci: bool) -> tuple[Action, int]:
     raise ParseError(f'unknown move letter {base!r}')
 
 def parse_actions(s: str, ci: bool = False) -> list[Action]:
-    '''Parse standard Rubik's cube move notation into a list of actions.
+    '''Parse standard cube move notation into a list of actions.
 
     Tokens may be separated by optional whitespace. Each token is a
     base letter followed by an optional modifier: nothing (CW),

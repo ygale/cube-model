@@ -1,6 +1,6 @@
 '''Tests for rigid cube rotations.'''
 
-from rubik_model import (
+from cube_model import (
     Color,
     Move,
     Multiplicity,

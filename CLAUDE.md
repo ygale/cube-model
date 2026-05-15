@@ -1,8 +1,8 @@
 @python.md
 
-# rubik-cube-model
+# cube-model
 
-An orientation-independent model of the Rubik's Cube. The model can be used
+An orientation-independent model of the cube. The model can be used
 to study properties of the cube, study and discover solution methods and
 algorithms, and build cube games. All operations are defined using only
 relative navigation — no absolute coordinates are ever computed or used.

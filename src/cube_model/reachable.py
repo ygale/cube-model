@@ -1,4 +1,4 @@
-'''Reachability test for the Rubik's cube.
+'''Reachability test for the cube.
 
 A cube position is reachable from the solved position by face moves
 if and only if the three criteria checked here are all satisfied.

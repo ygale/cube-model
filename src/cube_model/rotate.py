@@ -1,4 +1,4 @@
-'''Rigid rotation of the Rubik's cube.'''
+'''Rigid rotation of the cube.'''
 
 from .new_cube import solved
 from .model import (

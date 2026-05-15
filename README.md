@@ -1,6 +1,6 @@
-# rubik-model
+# cube-model
 
-An orientation-independent Rubik's cube model in strictly typed Python.
+An orientation-independent cube model in strictly typed Python.
 
 ## Highlights
 
@@ -14,13 +14,13 @@ An orientation-independent Rubik's cube model in strictly typed Python.
 ## Install
 
 ```bash
-pip install rubik-model
+pip install cube-model
 ```
 
 ## Example
 
 ```python
-from rubik_model import Color, Move, Multiplicity, Side, solved, move
+from cube_model import Color, Move, Multiplicity, Side, solved, move
 
 cube = solved()
 assert cube.front_color is Color.GREEN

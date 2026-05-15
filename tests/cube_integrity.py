@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from rubik_model import (
+from cube_model import (
   Color,
   CornerSticker,
   Cube,
   EdgeSticker,
 )
-from rubik_model.reachable import (
+from cube_model.reachable import (
   corner_rotations_ok,
   edge_flips_ok,
   locations_ok,

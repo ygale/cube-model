@@ -1,7 +1,7 @@
 '''Tests for new cube.'''
 
 from cube_integrity import check_cube_integrity
-from rubik_model import Cube, shuffled
+from cube_model import Cube, shuffled
 
 def test_shuffled() -> None:
     '''Test integrity of shuffled cubes.'''
