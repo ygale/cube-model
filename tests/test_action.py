@@ -136,12 +136,12 @@ class TestSliceMoves:
     '''Tests for slice-move tokens.'''
 
     def test_M_cw(self) -> None:
-        '''M parses as SliceMove on LEFT CW.'''
-        assert parse_actions('M') == [_slice(Side.LEFT, Multiplicity.CW)]
+        '''M parses as SliceMove on RIGHT CW.'''
+        assert parse_actions('M') == [_slice(Side.RIGHT, Multiplicity.CW)]
 
     def test_E_ccw(self) -> None:
-        '''E apostrophe parses as SliceMove on BOTTOM CCW.'''
-        assert parse_actions("E'") == [_slice(Side.BOTTOM, Multiplicity.CCW)]
+        '''E apostrophe parses as SliceMove on TOP CCW.'''
+        assert parse_actions("E'") == [_slice(Side.TOP, Multiplicity.CCW)]
 
     def test_S2(self) -> None:
         '''S2 parses as SliceMove on FRONT TWO.'''
@@ -208,10 +208,10 @@ class TestCaseInsensitiveDialect:
     def test_slice_ci(self) -> None:
         '''Slice letters parse in either case in ci mode.'''
         assert parse_actions('M', ci=True) == [
-            _slice(Side.LEFT, Multiplicity.CW)
+            _slice(Side.RIGHT, Multiplicity.CW)
         ]
         assert parse_actions('e', ci=True) == [
-            _slice(Side.BOTTOM, Multiplicity.CW)
+            _slice(Side.TOP, Multiplicity.CW)
         ]
 
     def test_sequence_ci(self) -> None:
@@ -220,7 +220,7 @@ class TestCaseInsensitiveDialect:
             _face(Side.RIGHT, Multiplicity.CW),
             _wide(Side.TOP, Multiplicity.CW),
             _rot(Side.RIGHT, Multiplicity.TWO),
-            _slice(Side.LEFT, Multiplicity.CCW),
+            _slice(Side.RIGHT, Multiplicity.CCW),
         ]
 
 class TestParseErrors:
@@ -307,7 +307,7 @@ class TestAct:
 
     def test_act_slice_matches_decomposition(self) -> None:
         '''act() with SliceMove matches manual decomposition.'''
-        m: Move = Move(Side.LEFT, Multiplicity.CW)
+        m: Move = Move(Side.RIGHT, Multiplicity.CW)
         c1 = solved()
         act(SliceMove(m), c1)
         c2 = solved()
@@ -319,7 +319,7 @@ class TestAct:
     def test_act_slice_changes_cube(self) -> None:
         '''act() with SliceMove changes the cube state.'''
         cube = solved()
-        act(SliceMove(Move(Side.LEFT, Multiplicity.CW)), cube)
+        act(SliceMove(Move(Side.RIGHT, Multiplicity.CW)), cube)
         check_cube_integrity(cube)
         assert cube != solved()
 
@@ -415,7 +415,7 @@ class TestActed:
     def test_acted_slice_immutable(self) -> None:
         '''acted() with SliceMove does not mutate the original.'''
         cube = solved()
-        acted(SliceMove(Move(Side.LEFT, Multiplicity.CW)), cube)
+        acted(SliceMove(Move(Side.RIGHT, Multiplicity.CW)), cube)
         assert cube == solved()
 
     def test_acted_wide_period(self) -> None:

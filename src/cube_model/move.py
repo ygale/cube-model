@@ -39,7 +39,7 @@ restore_home: dict[tuple[Side, Multiplicity], list[Nav]] = {
   (Side.FRONT, Multiplicity.TWO): parse_navs('NNNN'),
 
   (Side.LEFT, Multiplicity.CW): parse_navs('OONN'),
-  (Side.LEFT, Multiplicity.CCW): parse_navs('OONNOO'),
+  (Side.LEFT, Multiplicity.CCW): parse_navs('ONNOO'),
   (Side.LEFT, Multiplicity.TWO): parse_navs('ONNNNOO'),
 
   (Side.TOP, Multiplicity.CW): parse_navs('NNOO'),

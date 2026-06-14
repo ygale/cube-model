@@ -89,8 +89,8 @@ _WIDE_SIDE: dict[str, Side] = {
 }
 
 _SLICE_SIDE: dict[str, Side] = {
-    'M': Side.LEFT,
-    'E': Side.BOTTOM,
+    'M': Side.RIGHT,
+    'E': Side.TOP,
     'S': Side.FRONT,
 }
 

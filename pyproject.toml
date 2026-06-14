@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cube-model"
-version = "1.0.3"
+version = "1.0.4"
 description = "Orientation-independent cube model in strictly typed Python"
 authors = ["Yitzchak Gale <gale@sefer.org>"]
 readme = "README.md"
