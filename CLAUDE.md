@@ -23,6 +23,11 @@ value) and an `other` pointer.
 - On a corner cubie, the three `CornerSticker`s form a circular linked list
   via `other`, ordered clockwise as seen from outside the cube.
 - On an edge cubie, the two `EdgeSticker`s form a 2-cycle via `other`.
+- Stickers compare as equal if their colors are equal and all the
+  colors of their other-cycles are equal. Due to the structure of
+  the cube, for both `CornerSticker` and `EdgeSticker` it is
+  sufficient to check only the sticker itself and its first other
+  sticker.
 
 ### Face Adjacency Maps
 
@@ -57,6 +62,13 @@ Equality on stickers is determined by color and other.color.
 It follows that standard dataclass equality makes cubes
 equal exactly when they are in the same position and
 the same orientation.
+
+### Cube Equality
+
+Two cubes compare as equal if all of their stickers have the same
+color and they have the same orientation. This equality condition
+is provided by standard dataclass equality due to the way that
+equality is defined for stickers.
 
 ## Navigation
 
@@ -247,6 +259,10 @@ without modifying the supplied cube. In either case, the sticker
 objects of the supplied cube are re-used, and no new sticker objects
 are created.
 
+## Cube Rotations
+- Use `rotate(Move, Cube)` and `rotated(Move, Cube)` for rigid rotations of the cube
+- Use `act(Action, Cube)` and `acted(Action, Cube)` for applying actions
+
 ## Conventions Specific to This Project
 
 - Never use absolute coordinates, indices, or position arithmetic. All
@@ -265,7 +281,3 @@ are created.
   evaluation on 3.14+ without it.
 - When modifying any code described in an Implementation detail section
   of this file, update that section to match.
-
-## Cube Rotations
-- Use `rotate(Move, Cube)` and `rotated(Move, Cube)` for rigid rotations of the cube
-- Use `act(Action, Cube)` and `acted(Action, Cube)` for applying actions
